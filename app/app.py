@@ -16,7 +16,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st  # noqa: E402
 
-from app import presenters  # noqa: E402
+from app import presenters, ui  # noqa: E402
 from app.config import REPO_ROOT, ConfigError, load_settings  # noqa: E402
 from app.models import InspectionError, Spec  # noqa: E402
 from app.pipeline import MAX_UPLOAD_MB, run_inspection, validate_image  # noqa: E402
@@ -27,7 +27,7 @@ SPEC_DIR = Path(os.environ.get("SHELF_SENSE_SPEC_DIR", REPO_ROOT / "specs"))
 DEMO_DIR = Path(os.environ.get("SHELF_SENSE_DEMO_DIR", REPO_ROOT / "data" / "demo"))
 IMAGE_SUFFIXES = (".jpg", ".jpeg", ".png")
 
-st.set_page_config(page_title="Shelf-Sense", layout="wide")
+st.set_page_config(page_title="Shelf-Sense", layout="wide", initial_sidebar_state="collapsed")
 
 
 # --- state helpers ---------------------------------------------------------------
@@ -59,6 +59,10 @@ def _select_demo(path: str) -> None:
     _select_image(Path(path).name, Path(path).read_bytes(), "demo")
 
 
+def _clear_image() -> None:
+    st.session_state.image = None
+
+
 def _request_retry() -> None:
     st.session_state.retry = True
 
@@ -70,159 +74,148 @@ def _spec_paths() -> dict[str, str]:
 
 # --- header ----------------------------------------------------------------------
 
-st.title("Shelf-Sense")
-st.caption(
-    "Check a shelf photo against its spec: per-item status from a vision model, estimated margin at risk "
-    "computed by code, and a list of actions."
-)
+def html(markup: str) -> None:
+    st.markdown(markup, unsafe_allow_html=True)
+
+
+html(ui.style_tag())
 
 try:
     settings, config_error = load_settings(), None
 except ConfigError as exc:
     settings, config_error = None, str(exc)
 
+html(ui.header(
+    settings.model_name if settings else None,
+    settings.endpoint_host if settings else None,
+    mock=bool(settings and settings.mock_mode),
+    configured=settings is not None,
+))
 if config_error:
-    st.error(f"Inference is not configured, so inspections can't run. {config_error}")
+    html(ui.notice("bad", "Not configured", "Inference is not configured, so inspections can't run.", config_error))
 elif settings.mock_mode:
-    st.warning(
-        "**MOCK MODE.** Inspections return a fixed fake result and make no AMD inference call. "
-        "Turn MOCK_MODE off for demos and deployment."
-    )
-else:
-    st.caption(f"Inference: **{settings.model_name}** via AMD Developer Cloud Token Factory (`{settings.endpoint_host}`)")
+    html(ui.notice("warn", "Mock mode", "MOCK MODE. Inspections return a fixed fake result and make no AMD "
+                   "inference call. Turn MOCK_MODE off for demos and deployment."))
 
-left, right = st.columns([2, 3], gap="large")
+left, right = st.columns([4, 8], gap="large")
 
-# --- left: inputs ----------------------------------------------------------------
+# --- left: inspection setup ------------------------------------------------------------
 
-with left:
-    st.subheader("1. Spec")
+with left, st.container(border=True):
+    html(ui.section("01", "Inspection setup"))
     spec_paths = _spec_paths()
     spec = None
     if not spec_paths:
-        st.error(f"No spec files found in {SPEC_DIR}.")
+        html(ui.notice("bad", "No spec", f"No spec files found in {SPEC_DIR}."))
     else:
-        spec_name = st.selectbox("Inspection spec", list(spec_paths), key="spec_name")
+        spec_name = st.selectbox("Shelf specification", list(spec_paths), key="spec_name")
         try:
             spec = Spec.load(spec_paths[spec_name])
         except Exception as exc:  # malformed spec file: show it, don't crash the page
-            st.error(f"Spec file {spec_name}.json is invalid: {type(exc).__name__}: {str(exc)[:300]}")
+            html(ui.notice("bad", "Invalid spec", f"Spec file {spec_name}.json is invalid.",
+                           f"{type(exc).__name__}: {str(exc)[:300]}"))
     if spec:
-        st.markdown(f"**{spec.location}** · `{spec.spec_id}`")
-        st.dataframe(
-            [
-                {
-                    "Product": i.label,
-                    "Expected": i.expected_count,
-                    "Unit margin (demo assumption)": presenters.usd(i.unit_margin_usd)
-                    if i.unit_margin_usd is not None else "Not set",
-                }
-                for i in spec.items
-            ],
-            hide_index=True,
-            use_container_width=True,
-        )
-        st.caption("Unit margins are author-entered demo assumptions, not real retail data.")
+        html(ui.label("Expected inventory"))
+        html(ui.spec_table(spec))
 
-    st.subheader("2. Shelf photo")
+    html(ui.label("Shelf photograph", f"JPEG / PNG · up to {MAX_UPLOAD_MB} MB"))
+    image = st.session_state.get("image")
+    if image and image["error"]:
+        html(ui.notice("bad", "Can't use file", f"{image['name']}: {image['error']}"))
+    elif image:
+        st.image(image["preview"], use_container_width=True)
+        html(ui.file_meta(image["name"], len(image["data"]), image["preview"].size,
+                          "demo photo" if image["source"] == "demo" else "uploaded"))
+        html(ui.hint("Sent to the model EXIF-rotated and resized to at most 1024 px."))
+
     demo_files = sorted(p for p in DEMO_DIR.glob("*") if p.suffix.lower() in IMAGE_SUFFIXES) if DEMO_DIR.is_dir() else []
     if demo_files:
-        st.caption("Use a demo photo:")
+        html(ui.label("Demo photo", "self-taken"))
         cols = st.columns(len(demo_files))
         for col, path in zip(cols, demo_files):
             col.button(path.stem.replace("_", " ").title(), key=f"demo_{path.stem}",
                        on_click=_select_demo, args=(str(path),), use_container_width=True)
-    else:
-        st.caption("No demo photos are bundled yet. Upload a shelf photo instead.")
-    st.file_uploader(f"Upload a shelf photo (JPEG or PNG, up to {MAX_UPLOAD_MB} MB)",
-                     type=["jpg", "jpeg", "png"], key="uploader", on_change=_on_upload)
+    st.file_uploader("Replace photo" if image else "Upload shelf photo", type=["jpg", "jpeg", "png"],
+                     key="uploader", on_change=_on_upload)
+    if image:
+        st.button("Remove photo", key="clear_image", on_click=_clear_image)
 
-    image = st.session_state.get("image")
-    if image and image["error"]:
-        st.error(f"**{image['name']}**: {image['error']}")
-    elif image:
-        st.image(image["preview"], caption=f"{image['name']} (orientation as sent to the model)",
-                 use_container_width=True)
-
-    st.subheader("3. Inspect")
+    html('<div class="ss-gap"></div>')
     ready = bool(settings and spec and image and not image["error"])
-    clicked = st.button("Run inspection", key="run", type="primary", disabled=not ready, use_container_width=True)
+    clicked = st.button("Run inspection  →", key="run", type="primary", disabled=not ready, use_container_width=True)
     if not ready:
         if not image:
-            st.caption("Upload a photo or pick a demo photo to enable the inspection.")
+            html(ui.hint("Upload a photo or pick the demo photo to enable the inspection."))
         elif image["error"]:
-            st.caption("Choose a readable JPEG or PNG photo to enable the inspection.")
+            html(ui.hint("Choose a readable JPEG or PNG photo to enable the inspection."))
         elif not settings:
-            st.caption("Configure the inference endpoint (see the message at the top) to enable the inspection.")
+            html(ui.hint("Configure the inference endpoint (see the message at the top) to enable the inspection."))
 
-# --- right: run + results ----------------------------------------------------------
+# --- right: run + results -----------------------------------------------------------------
 
-with right:
+with right, st.container(border=True):
+    html(ui.section("02", "Results", "AI counts · code decisions"))
     run_key = f"{spec.spec_id}:{image['sha']}" if ready else None
 
     if ready and (clicked or st.session_state.pop("retry", False)):
-        label = (
-            "Running MOCK inspection (no AMD call)…" if settings.mock_mode
-            else f"Running inspection on {settings.model_name} via the AMD Token Factory endpoint…"
-        )
-        with st.status(label, expanded=False) as status:
-            try:
-                st.session_state.outcome = {"key": run_key, "run": run_inspection(spec, image["data"], settings)}
-                status.update(label="Inspection complete", state="complete")
-            except InspectionError as exc:
-                st.session_state.outcome = {"key": run_key, "error": presenters.error_message(exc)}
-                status.update(label="Inspection failed", state="error")
-            except Exception as exc:  # never show a raw stack trace in the UI
-                log.exception("unexpected inspection failure")
-                st.session_state.outcome = {"key": run_key, "error": f"Unexpected error ({type(exc).__name__}). Retry; if it persists, check the server log."}
-                status.update(label="Inspection failed", state="error")
+        slot = st.empty()
+        slot.markdown(ui.processing(settings.model_name, settings.mock_mode), unsafe_allow_html=True)
+        try:
+            st.session_state.outcome = {"key": run_key, "run": run_inspection(spec, image["data"], settings)}
+        except InspectionError as exc:
+            st.session_state.outcome = {"key": run_key, "error": presenters.error_message(exc)}
+        except Exception as exc:  # never show a raw stack trace in the UI
+            log.exception("unexpected inspection failure")
+            st.session_state.outcome = {"key": run_key, "error": f"Unexpected error ({type(exc).__name__}). Retry; if it persists, check the server log."}
+        slot.empty()
 
     outcome = st.session_state.get("outcome")
-    st.subheader("Results")
     if not outcome or not ready:
-        st.info("Pick a spec and a shelf photo, then run the inspection. Results appear here.")
+        html(ui.empty_state())
     elif outcome["key"] != run_key:
-        st.info("The photo or spec changed since the last inspection. Run the inspection again to see results for it.")
+        html(ui.notice("plain", "Out of date", "The photo or spec changed since the last inspection. "
+                       "Run the inspection again to see results for it."))
+        html(ui.empty_state())
     elif "error" in outcome:
-        st.error(presenters.md(outcome["error"]))
+        headline, _, detail = outcome["error"].partition("\n\nDetails ")
+        html(ui.notice("bad", "Inspection failed", headline, f"Details {detail}" if detail else None))
         st.button("Retry inspection", key="retry_button", on_click=_request_retry)
     else:
         run = outcome["run"]
         result, summary, note = run.result, run.summary, run.note
 
+        html(ui.verdict(result, settings.endpoint_host if settings else None))
         if result.is_mock:
-            st.warning("**MOCK RESULT.** Fixed fake data. No AMD inference call was made.")
-
-        kind, text = presenters.overall_badge(result)
-        getattr(st, kind)(f"**Overall status: {text}**")
-
-        c1, c2 = st.columns(2)
-        c1.metric(presenters.estimate_label(summary), presenters.estimated_value(summary),
-                  help=presenters.estimate_help(summary))
-        c2.metric(presenters.POTENTIAL_LABEL, presenters.potential_value(summary),
-                  help="Upper bound for misplaced / needs-review items. Not included in the estimate.")
+            html(ui.notice("warn", "Mock result", "MOCK RESULT. Fixed fake data. No AMD inference call was made."))
+        html(ui.stats(result, summary))
+        tags = {"info": ("warn", "Unverified"), "warning": ("warn", "Attention")}
         for msg_kind, msg in presenters.exposure_messages(summary):
-            getattr(st, msg_kind)(presenters.md(msg))
+            kind, tag = tags.get(msg_kind, ("warn", "Attention"))
+            html(ui.notice(kind, tag, msg))
 
         if not result.items:
-            st.warning("The model's output could not be validated after one retry, so no item results are shown.")
+            html(ui.notice("warn", "Needs review", "The model's output could not be validated after one retry, "
+                           "so no item results are shown."))
             with st.expander("Raw model output"):
                 st.code(result.raw_model_notes or "(empty)", language=None)
         else:
-            st.markdown("**Items**")
-            st.dataframe(presenters.item_rows(result, summary, note), hide_index=True, use_container_width=True)
-            st.caption("Model confidence is self-reported by the model and is not calibrated.")
+            html(ui.label("Discrepancies", f"{len(ui.discrepancy_items(summary))} of {len(result.items)} products"))
+            html(ui.discrepancies(summary))
+            html(ui.label("Product results", "counts from the model · status and money from code"))
+            html(ui.items_table(result, summary))
 
-        st.markdown("**Recommended actions**")
-        st.markdown(presenters.note_markdown(note.text))
-        st.caption(presenters.md(presenters.note_source_caption(note)))
+        html('<div class="ss-gap"></div>')
+        html(ui.actions(note, summary))
+        html('<div class="ss-gap"></div>')
 
+        if result.items:
+            with st.expander("Model observations"):
+                html(ui.observations_table(result, summary))
         if summary.calculation_available:
             with st.expander("How the figures are calculated"):
                 st.markdown(presenters.md(summary.assumptions))
                 for i in summary.items:
                     st.markdown(presenters.md(f"- **{i.label}**: {i.assumptions}"))
-
         with st.expander("Technical details"):
             st.markdown(
                 presenters.md(

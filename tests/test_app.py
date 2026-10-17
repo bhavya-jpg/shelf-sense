@@ -1,7 +1,9 @@
 """Streamlit UI driven headlessly with streamlit.testing.AppTest. No real AMD calls:
 runs use MOCK_MODE or an unreachable local URL."""
 
+import html
 import io
+import re
 
 import pytest
 from PIL import Image
@@ -42,20 +44,26 @@ def texts(elements):
     return " ".join(e.value for e in elements)
 
 
+def page_text(at) -> str:
+    """Visible text of the custom HTML components and markdown (tags stripped, entities decoded)."""
+    raw = texts(at.markdown) + " " + texts(at.caption)
+    return html.unescape(re.sub(r"<[^>]+>", " ", raw))
+
+
 def test_app_starts_and_loads_spec_in_mock_mode(env):
     env.setenv("MOCK_MODE", "true")
     at = start()
-    assert at.title[0].value == "Shelf-Sense"
-    assert "MOCK MODE" in texts(at.warning)
+    assert "Shelf-Sense" in page_text(at)
+    assert "MOCK MODE" in page_text(at)
     assert at.selectbox(key="spec_name").value == "cereal_endcap"  # tests/fixtures/cereal_endcap.json
     assert "Aisle 4 endcap" in texts(at.markdown) and "cereal_endcap_v1" in texts(at.markdown)
     assert at.button(key="run").disabled  # no photo yet
-    assert "Results appear here" in texts(at.info)
+    assert "Results appear here" in page_text(at)
 
 
 def test_missing_config_is_explained_and_blocks_runs(env):
     at = start()
-    assert "Inference is not configured" in texts(at.error)
+    assert "Inference is not configured" in page_text(at)
     at.button(key="demo_synthetic").click().run()
     assert at.button(key="run").disabled
 
@@ -65,7 +73,7 @@ def test_invalid_image_is_rejected_without_inference(env):
     at = start()
     at.button(key="demo_broken").click().run()
     assert not at.exception
-    assert "not a readable JPEG/PNG image" in texts(at.error)
+    assert "not a readable JPEG/PNG image" in page_text(at)
     assert at.button(key="run").disabled
 
 
@@ -76,15 +84,17 @@ def test_mock_run_shows_labelled_results(env):
     assert not at.button(key="run").disabled
     at.button(key="run").click().run()
     assert not at.exception
-    assert "MOCK RESULT" in texts(at.warning)
-    assert "Non-compliant" in texts(at.error)
-    metrics = {m.label: m.value for m in at.metric}
-    assert metrics["Estimated Margin at Risk (Unverified)"] == "$2.00"
-    assert "AI-estimated counts" in texts(at.info)  # unverified-estimate notice is shown
-    assert "confirmed" not in (texts(at.markdown) + texts(at.caption) + texts(at.warning)).lower()  # mock: Brand B 2 of 4 x $1.00
-    assert len(at.dataframe) == 2  # spec table + results table
-    assert "MOCK_MODE" in texts(at.caption)  # action note labelled as template due to mock
-    assert "revenue at risk" not in (texts(at.markdown) + texts(at.caption)).lower()
+    text = page_text(at)
+    assert "MOCK RESULT" in text
+    assert "Non-compliant" in text
+    # Stat strip: label and value of the unverified estimate (mock: Brand B 2 of 4 x $1.00).
+    assert re.search(r"Estimated Margin at Risk \(Unverified\)\s+\$2\.00", text)
+    assert "AI-estimated counts" in text  # unverified-estimate notice is shown
+    assert "confirmed" not in text.lower()
+    assert "Product results" in text and "Brand B Cereal Box" in text  # results table rendered
+    assert "MOCK_MODE" in text  # action note labelled as template due to mock
+    assert "Deterministic template" in text and "AMD-worded" not in text
+    assert "revenue at risk" not in text.lower()
 
 
 def test_amd_failure_is_shown_with_retry_not_a_crash(env):
@@ -94,7 +104,7 @@ def test_amd_failure_is_shown_with_retry_not_a_crash(env):
     at.button(key="demo_synthetic").click().run()
     at.button(key="run").click().run()
     assert not at.exception
-    assert "Could not reach the AMD inference endpoint" in texts(at.error)
+    assert "Could not reach the AMD inference endpoint" in page_text(at)
     assert at.button(key="retry_button")
 
 
