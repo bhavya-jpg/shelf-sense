@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-10-17T18:33:21+00:00",
+  "prompt_variant": "baseline_v1",
+  "prompt_sha256": "9db91b66378a",
+  "model": "Gemma-4-31B-IT",
+  "endpoint_host": "developer.amd.com.cn",
+  "image": "data/demo/compliant.png",
+  "image_sent_size": [
+    1024,
+    774
+  ],
+  "spec_id": "nestle_cereal_bay_v1",
+  "truth": {
+    "image": "data/demo/compliant.png",
+    "spec": "specs/nestle_cereal_bay.json",
+    "source": "Counted manually by the project author from the photo (visible packages, half-hidden boxes included, left-edge cut-off boxes and the single Frosties excluded). Confirmed 2026-10-17.",
+    "counts": {
+      "nestle_stars": 16,
+      "koko_krunch": 8,
+      "milo_cereal": 4,
+      "trix": 4
+    },
+    "statuses": {
+      "nestle_stars": "present",
+      "koko_krunch": "present",
+      "milo_cereal": "present",
+      "trix": "present"
+    },
+    "overall_status": "compliant"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "raw_replies": [
+        "{\"items\": [{\"item_id\": \"nestle_stars\", \"detected_count\": 11, \"status\": \"partial\", \"confidence\": 100, \"note\": \"11 boxes visible across the top and middle shelves.\"}, {\"item_id\": \"koko_krunch\", \"detected_count\": 6, \"status\": \"partial\", \"confidence\": 100, \"note\": \"6 boxes visible on the left side of the shelves.\"}, {\"item_id\": \"milo_cereal\", \"detected_count\": 3, \"status\": \"partial\", \"confidence\": 100, \"note\": \"3 green boxes visible in the middle section.\"}, {\"item_id\": \"trix\", \"detected_count\": 4, \"status\": \"present\", \"confidence\": 100, \"note\": \"4 red boxes visible on the bottom two shelves.\"}], \"notes\": \"Several items are under-stocked compared to the expected counts.\"}"
+      ],
+      "latency_s": 11.85,
+      "result": {
+        "spec_id": "nestle_cereal_bay_v1",
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "expected_count": 16,
+            "detected_count": 11,
+            "status": "partial",
+            "confidence": 100.0,
+            "note": "11 boxes visible across the top and middle shelves."
+          },
+          {
+            "item_id": "koko_krunch",
+            "expected_count": 8,
+            "detected_count": 6,
+            "status": "partial",
+            "confidence": 100.0,
+            "note": "6 boxes visible on the left side of the shelves."
+          },
+          {
+            "item_id": "milo_cereal",
+            "expected_count": 4,
+            "detected_count": 3,
+            "status": "partial",
+            "confidence": 100.0,
+            "note": "3 green boxes visible in the middle section."
+          },
+          {
+            "item_id": "trix",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "4 red boxes visible on the bottom two shelves."
+          }
+        ],
+        "overall_status": "non_compliant",
+        "raw_model_notes": "Several items are under-stocked compared to the expected counts.",
+        "is_mock": false,
+        "model_name": "Gemma-4-31B-IT",
+        "latency_s": 11.85
+      },
+      "score": {
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "truth": 16,
+            "detected": 11,
+            "error": -5,
+            "status": "partial",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": false
+          },
+          {
+            "item_id": "koko_krunch",
+            "truth": 8,
+            "detected": 6,
+            "error": -2,
+            "status": "partial",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": false
+          },
+          {
+            "item_id": "milo_cereal",
+            "truth": 4,
+            "detected": 3,
+            "error": -1,
+            "status": "partial",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": false
+          },
+          {
+            "item_id": "trix",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          }
+        ],
+        "exact_counts": 1,
+        "correct_statuses": 1,
+        "n_items": 4,
+        "total_abs_count_error": 8,
+        "overall_status": "non_compliant",
+        "overall_correct": false
+      }
+    }
+  ]
+}

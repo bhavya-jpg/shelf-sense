@@ -1,0 +1,5 @@
+{
+  "image": "data/demo/compliant.png",
+  "source": "Hand-placed shelf bands for this photo (an oracle for the per-shelf cropping experiment, not automatic detection). Each band runs from just above a shelf's boxes to the price rail below them; boxes are not cut. Coordinates are [left, top, right, bottom] in native 1354x1024 pixels, top shelf first.",
+  "shelves": [[0, 40, 1354, 292], [0, 292, 1354, 538], [0, 535, 1354, 778], [0, 778, 1354, 1024]]
+}

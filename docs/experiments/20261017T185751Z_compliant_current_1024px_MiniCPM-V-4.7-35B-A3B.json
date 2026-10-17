@@ -1,0 +1,40 @@
+{
+  "timestamp": "2026-10-17T18:56:19+00:00",
+  "prompt_variant": "current",
+  "prompt_sha256": "98359f4e9e4d",
+  "model": "MiniCPM-V-4.7-35B-A3B",
+  "endpoint_host": "developer.amd.com.cn",
+  "image": "data/demo/compliant.png",
+  "max_image_dim": 1024,
+  "image_sent_size": [
+    1024,
+    774
+  ],
+  "spec_id": "nestle_cereal_bay_v1",
+  "truth": {
+    "image": "data/demo/compliant.png",
+    "spec": "specs/nestle_cereal_bay.json",
+    "source": "Counted manually by the project author from the photo (visible packages, half-hidden boxes included, left-edge cut-off boxes and the single Frosties excluded). Confirmed 2026-10-17.",
+    "counts": {
+      "nestle_stars": 16,
+      "koko_krunch": 8,
+      "milo_cereal": 4,
+      "trix": 4
+    },
+    "statuses": {
+      "nestle_stars": "present",
+      "koko_krunch": "present",
+      "milo_cereal": "present",
+      "trix": "present"
+    },
+    "overall_status": "compliant"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "raw_replies": [],
+      "latency_s": 91.86,
+      "error": "endpoint_timeout: The AMD inference endpoint at developer.amd.com.cn did not respond within 90s (ReadTimeout) \u2014 the shared endpoint may be busy; retry shortly"
+    }
+  ]
+}

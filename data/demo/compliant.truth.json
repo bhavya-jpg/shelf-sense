@@ -1,0 +1,8 @@
+{
+  "image": "data/demo/compliant.png",
+  "spec": "specs/nestle_cereal_bay.json",
+  "source": "Counted manually by the project author from the photo (visible packages, half-hidden boxes included, left-edge cut-off boxes and the single Frosties excluded). Confirmed 2026-10-17.",
+  "counts": {"nestle_stars": 16, "koko_krunch": 8, "milo_cereal": 4, "trix": 4},
+  "statuses": {"nestle_stars": "present", "koko_krunch": "present", "milo_cereal": "present", "trix": "present"},
+  "overall_status": "compliant"
+}

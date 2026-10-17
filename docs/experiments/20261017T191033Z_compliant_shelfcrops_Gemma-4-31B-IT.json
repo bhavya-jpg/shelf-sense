@@ -1,0 +1,1189 @@
+{
+  "timestamp": "2026-10-17T19:07:57+00:00",
+  "experiment": "per-shelf crops (hand-placed oracle bands)",
+  "model": "Gemma-4-31B-IT",
+  "endpoint_host": "developer.amd.com.cn",
+  "max_image_dim": 1024,
+  "crops": {
+    "image": "data/demo/compliant.png",
+    "source": "Hand-placed shelf bands for this photo (an oracle for the per-shelf cropping experiment, not automatic detection). Each band runs from just above a shelf's boxes to the price rail below them; boxes are not cut. Coordinates are [left, top, right, bottom] in native 1354x1024 pixels, top shelf first.",
+    "shelves": [
+      [
+        0,
+        40,
+        1354,
+        292
+      ],
+      [
+        0,
+        292,
+        1354,
+        538
+      ],
+      [
+        0,
+        535,
+        1354,
+        778
+      ],
+      [
+        0,
+        778,
+        1354,
+        1024
+      ]
+    ]
+  },
+  "image_sent_sizes": [
+    [
+      1024,
+      191
+    ],
+    [
+      1024,
+      186
+    ],
+    [
+      1024,
+      184
+    ],
+    [
+      1024,
+      186
+    ]
+  ],
+  "spec_id": "nestle_cereal_bay_v1",
+  "truth": {
+    "image": "data/demo/compliant.png",
+    "spec": "specs/nestle_cereal_bay.json",
+    "source": "Counted manually by the project author from the photo (visible packages, half-hidden boxes included, left-edge cut-off boxes and the single Frosties excluded). Confirmed 2026-10-17.",
+    "counts": {
+      "nestle_stars": 16,
+      "koko_krunch": 8,
+      "milo_cereal": 4,
+      "trix": 4
+    },
+    "statuses": {
+      "nestle_stars": "present",
+      "koko_krunch": "present",
+      "milo_cereal": "present",
+      "trix": "present"
+    },
+    "overall_status": "compliant"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "shelves": [
+        {
+          "shelf": 1,
+          "latency_s": 11.46,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [6], \"detected_count\": 6, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"6 blue boxes visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes of Koko Krunch visible.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green Milo boxes visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 6,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "6 blue boxes visible on the shelf.",
+                "shelf_counts": [
+                  6
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes of Koko Krunch visible.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green Milo boxes visible.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 11.46,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 2,
+          "latency_s": 8.84,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [5], \"detected_count\": 5, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"5 blue boxes visible on the right side of the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes visible, one partially obscured.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green boxes visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 5,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "5 blue boxes visible on the right side of the shelf.",
+                "shelf_counts": [
+                  5
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes visible, one partially obscured.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green boxes visible.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible on the shelf.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 8.84,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 3,
+          "latency_s": 22.98,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [3], \"detected_count\": 3, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Three blue boxes visible on the right side of the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two boxes of Koko Krunch visible on the left side.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green Milo Stay Active box visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red Trix boxes visible in the center.\"}], \"notes\": \"Only one shelf is visible in the provided image crop.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 3,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Three blue boxes visible on the right side of the shelf.",
+                "shelf_counts": [
+                  3
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two boxes of Koko Krunch visible on the left side.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green Milo Stay Active box visible.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red Trix boxes visible in the center.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image crop.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 22.98,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 4,
+          "latency_s": 12.24,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two boxes of Koko Krunch visible on the shelf.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green box of Milo cereal visible on the shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red boxes of Trix visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two boxes of Koko Krunch visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green box of Milo cereal visible on the shelf.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red boxes of Trix visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 12.24,
+            "counts_verified": false
+          }
+        }
+      ],
+      "merged": {
+        "spec_id": "nestle_cereal_bay_v1",
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "expected_count": 16,
+            "detected_count": 16,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 6 blue boxes visible on the shelf.; shelf 2: 5 blue boxes visible on the right side of the shelf.; shelf 3: Three blue boxes visible on the right side of the shelf.; shelf 4: Two blue boxes of Nestle Stars visible on the shelf.",
+            "shelf_counts": [
+              6,
+              5,
+              3,
+              2
+            ]
+          },
+          {
+            "item_id": "koko_krunch",
+            "expected_count": 8,
+            "detected_count": 8,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 boxes of Koko Krunch visible.; shelf 2: 2 boxes visible, one partially obscured.; shelf 3: Two boxes of Koko Krunch visible on the left side.; shelf 4: Two boxes of Koko Krunch visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "item_id": "milo_cereal",
+            "expected_count": 4,
+            "detected_count": 6,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 green Milo boxes visible.; shelf 2: 2 green boxes visible.; shelf 3: One green Milo Stay Active box visible.; shelf 4: One green box of Milo cereal visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "item_id": "trix",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: No red Trix boxes visible.; shelf 2: No red Trix boxes visible on the shelf.; shelf 3: Two red Trix boxes visible in the center.; shelf 4: Two red boxes of Trix visible on the shelf.",
+            "shelf_counts": [
+              0,
+              0,
+              2,
+              2
+            ]
+          }
+        ],
+        "overall_status": "compliant",
+        "raw_model_notes": null,
+        "is_mock": false,
+        "model_name": "Gemma-4-31B-IT",
+        "latency_s": 55.52,
+        "counts_verified": false
+      },
+      "score": {
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "truth": 16,
+            "detected": 16,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "koko_krunch",
+            "truth": 8,
+            "detected": 8,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "milo_cereal",
+            "truth": 4,
+            "detected": 6,
+            "error": 2,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": true
+          },
+          {
+            "item_id": "trix",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          }
+        ],
+        "exact_counts": 3,
+        "correct_statuses": 4,
+        "n_items": 4,
+        "total_abs_count_error": 2,
+        "overall_status": "compliant",
+        "overall_correct": true
+      },
+      "latency_s": 55.52
+    },
+    {
+      "run": 2,
+      "shelves": [
+        {
+          "shelf": 1,
+          "latency_s": 9.65,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [6], \"detected_count\": 6, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"6 blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes of Koko Krunch visible on the shelf.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green boxes of Milo cereal visible on the shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 6,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "6 blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  6
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes of Koko Krunch visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green boxes of Milo cereal visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible on the shelf.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 9.65,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 2,
+          "latency_s": 7.91,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [5], \"detected_count\": 5, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"5 blue boxes visible on the right side of the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes visible, one partially obscured.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green boxes visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 5,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "5 blue boxes visible on the right side of the shelf.",
+                "shelf_counts": [
+                  5
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes visible, one partially obscured.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green boxes visible.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible on the shelf.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 7.91,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 3,
+          "latency_s": 12.14,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [3], \"detected_count\": 3, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Three blue boxes visible on the right side of the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two boxes of Koko Krunch visible on the left side.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green Milo Stay Active box visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red Trix boxes visible in the center.\"}], \"notes\": \"Only one shelf is visible in the provided image crop.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 3,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Three blue boxes visible on the right side of the shelf.",
+                "shelf_counts": [
+                  3
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two boxes of Koko Krunch visible on the left side.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green Milo Stay Active box visible.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red Trix boxes visible in the center.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image crop.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 12.14,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 4,
+          "latency_s": 7.75,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two boxes of Koko Krunch visible on the shelf.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green box of Milo cereal visible on the shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red boxes of Trix visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two boxes of Koko Krunch visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green box of Milo cereal visible on the shelf.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red boxes of Trix visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 7.75,
+            "counts_verified": false
+          }
+        }
+      ],
+      "merged": {
+        "spec_id": "nestle_cereal_bay_v1",
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "expected_count": 16,
+            "detected_count": 16,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 6 blue boxes of Nestle Stars visible on the shelf.; shelf 2: 5 blue boxes visible on the right side of the shelf.; shelf 3: Three blue boxes visible on the right side of the shelf.; shelf 4: Two blue boxes of Nestle Stars visible on the shelf.",
+            "shelf_counts": [
+              6,
+              5,
+              3,
+              2
+            ]
+          },
+          {
+            "item_id": "koko_krunch",
+            "expected_count": 8,
+            "detected_count": 8,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 boxes of Koko Krunch visible on the shelf.; shelf 2: 2 boxes visible, one partially obscured.; shelf 3: Two boxes of Koko Krunch visible on the left side.; shelf 4: Two boxes of Koko Krunch visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              2,
+              2
+            ]
+          },
+          {
+            "item_id": "milo_cereal",
+            "expected_count": 4,
+            "detected_count": 6,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 green boxes of Milo cereal visible on the shelf.; shelf 2: 2 green boxes visible.; shelf 3: One green Milo Stay Active box visible.; shelf 4: One green box of Milo cereal visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "item_id": "trix",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: No red Trix boxes visible on the shelf.; shelf 2: No red Trix boxes visible on the shelf.; shelf 3: Two red Trix boxes visible in the center.; shelf 4: Two red boxes of Trix visible on the shelf.",
+            "shelf_counts": [
+              0,
+              0,
+              2,
+              2
+            ]
+          }
+        ],
+        "overall_status": "compliant",
+        "raw_model_notes": null,
+        "is_mock": false,
+        "model_name": "Gemma-4-31B-IT",
+        "latency_s": 37.45,
+        "counts_verified": false
+      },
+      "score": {
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "truth": 16,
+            "detected": 16,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "koko_krunch",
+            "truth": 8,
+            "detected": 8,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "milo_cereal",
+            "truth": 4,
+            "detected": 6,
+            "error": 2,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": true
+          },
+          {
+            "item_id": "trix",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          }
+        ],
+        "exact_counts": 3,
+        "correct_statuses": 4,
+        "n_items": 4,
+        "total_abs_count_error": 2,
+        "overall_status": "compliant",
+        "overall_correct": true
+      },
+      "latency_s": 37.45
+    },
+    {
+      "run": 3,
+      "shelves": [
+        {
+          "shelf": 1,
+          "latency_s": 7.89,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [6], \"detected_count\": 6, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"6 blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes of Koko Krunch visible on the shelf.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green boxes of Milo cereal visible on the shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image crop.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 6,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "6 blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  6
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes of Koko Krunch visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green boxes of Milo cereal visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible on the shelf.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image crop.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 7.89,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 2,
+          "latency_s": 8.97,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [5], \"detected_count\": 5, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"5 blue boxes visible on the right side of the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 boxes visible, one partially obscured.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"2 green boxes visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0], \"detected_count\": 0, \"count_reliable\": true, \"status\": \"missing\", \"confidence\": 100, \"note\": \"No red Trix boxes visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 5,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "5 blue boxes visible on the right side of the shelf.",
+                "shelf_counts": [
+                  5
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 boxes visible, one partially obscured.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "2 green boxes visible.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 0,
+                "status": "missing",
+                "confidence": 100.0,
+                "note": "No red Trix boxes visible on the shelf.",
+                "shelf_counts": [
+                  0
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 8.97,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 3,
+          "latency_s": 8.53,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [3], \"detected_count\": 3, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Three blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [3], \"detected_count\": 3, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Three boxes of Koko Krunch visible, including one variant.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green box of Milo cereal visible.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red boxes of Trix visible.\"}], \"notes\": \"Only one shelf is visible in the provided image crop.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 3,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Three blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  3
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 3,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Three boxes of Koko Krunch visible, including one variant.",
+                "shelf_counts": [
+                  3
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green box of Milo cereal visible.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red boxes of Trix visible.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image crop.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 8.53,
+            "counts_verified": false
+          }
+        },
+        {
+          "shelf": 4,
+          "latency_s": 7.57,
+          "raw_replies": [
+            "{\"shelves_visible\": 1, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two blue boxes of Nestle Stars visible on the shelf.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two boxes of Koko Krunch visible on the shelf.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1], \"detected_count\": 1, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"One green box of Milo cereal visible on the shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [2], \"detected_count\": 2, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Two red boxes of Trix visible on the shelf.\"}], \"notes\": \"Only one shelf is visible in the provided image.\"}"
+          ],
+          "result": {
+            "spec_id": "nestle_cereal_bay_v1",
+            "items": [
+              {
+                "item_id": "nestle_stars",
+                "expected_count": 16,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two blue boxes of Nestle Stars visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "koko_krunch",
+                "expected_count": 8,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two boxes of Koko Krunch visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              },
+              {
+                "item_id": "milo_cereal",
+                "expected_count": 4,
+                "detected_count": 1,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "One green box of Milo cereal visible on the shelf.",
+                "shelf_counts": [
+                  1
+                ]
+              },
+              {
+                "item_id": "trix",
+                "expected_count": 4,
+                "detected_count": 2,
+                "status": "partial",
+                "confidence": 100.0,
+                "note": "Two red boxes of Trix visible on the shelf.",
+                "shelf_counts": [
+                  2
+                ]
+              }
+            ],
+            "overall_status": "non_compliant",
+            "raw_model_notes": "Only one shelf is visible in the provided image.",
+            "is_mock": false,
+            "model_name": "Gemma-4-31B-IT",
+            "latency_s": 7.57,
+            "counts_verified": false
+          }
+        }
+      ],
+      "merged": {
+        "spec_id": "nestle_cereal_bay_v1",
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "expected_count": 16,
+            "detected_count": 16,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 6 blue boxes of Nestle Stars visible on the shelf.; shelf 2: 5 blue boxes visible on the right side of the shelf.; shelf 3: Three blue boxes of Nestle Stars visible on the shelf.; shelf 4: Two blue boxes of Nestle Stars visible on the shelf.",
+            "shelf_counts": [
+              6,
+              5,
+              3,
+              2
+            ]
+          },
+          {
+            "item_id": "koko_krunch",
+            "expected_count": 8,
+            "detected_count": 9,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 boxes of Koko Krunch visible on the shelf.; shelf 2: 2 boxes visible, one partially obscured.; shelf 3: Three boxes of Koko Krunch visible, including one variant.; shelf 4: Two boxes of Koko Krunch visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              3,
+              2
+            ]
+          },
+          {
+            "item_id": "milo_cereal",
+            "expected_count": 4,
+            "detected_count": 6,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: 2 green boxes of Milo cereal visible on the shelf.; shelf 2: 2 green boxes visible.; shelf 3: One green box of Milo cereal visible.; shelf 4: One green box of Milo cereal visible on the shelf.",
+            "shelf_counts": [
+              2,
+              2,
+              1,
+              1
+            ]
+          },
+          {
+            "item_id": "trix",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "shelf 1: No red Trix boxes visible on the shelf.; shelf 2: No red Trix boxes visible on the shelf.; shelf 3: Two red boxes of Trix visible.; shelf 4: Two red boxes of Trix visible on the shelf.",
+            "shelf_counts": [
+              0,
+              0,
+              2,
+              2
+            ]
+          }
+        ],
+        "overall_status": "compliant",
+        "raw_model_notes": null,
+        "is_mock": false,
+        "model_name": "Gemma-4-31B-IT",
+        "latency_s": 32.96,
+        "counts_verified": false
+      },
+      "score": {
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "truth": 16,
+            "detected": 16,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "koko_krunch",
+            "truth": 8,
+            "detected": 9,
+            "error": 1,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": true
+          },
+          {
+            "item_id": "milo_cereal",
+            "truth": 4,
+            "detected": 6,
+            "error": 2,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": true
+          },
+          {
+            "item_id": "trix",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          }
+        ],
+        "exact_counts": 2,
+        "correct_statuses": 4,
+        "n_items": 4,
+        "total_abs_count_error": 3,
+        "overall_status": "compliant",
+        "overall_correct": true
+      },
+      "latency_s": 32.96
+    }
+  ]
+}

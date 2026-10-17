@@ -1,0 +1,10 @@
+{
+  "spec_id": "nestle_cereal_bay_v1",
+  "location": "Cereal bay, 4 shelves",
+  "items": [
+    {"item_id": "nestle_stars", "label": "Nestle Stars cereal (blue box)", "expected_count": 16, "unit_margin_usd": 1.00},
+    {"item_id": "koko_krunch", "label": "Nestle Koko Krunch cereal (any variant)", "expected_count": 8, "unit_margin_usd": 1.00},
+    {"item_id": "milo_cereal", "label": "Nestle Milo cereal (green box, any variant)", "expected_count": 4, "unit_margin_usd": 1.00},
+    {"item_id": "trix", "label": "Trix cereal (red box)", "expected_count": 4, "unit_margin_usd": 1.00}
+  ]
+}

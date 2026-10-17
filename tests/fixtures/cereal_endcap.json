@@ -1,0 +1,9 @@
+{
+  "spec_id": "cereal_endcap_v1",
+  "location": "Aisle 4 endcap",
+  "items": [
+    {"item_id": "brand_a_cereal", "label": "Brand A Cereal Box", "expected_count": 6, "unit_margin_usd": 1.20, "est_daily_unit_sales": 8},
+    {"item_id": "brand_b_cereal", "label": "Brand B Cereal Box", "expected_count": 4, "unit_margin_usd": 1.00, "est_daily_unit_sales": 5},
+    {"item_id": "promo_sign", "label": "Promo Sign", "expected_count": 1, "unit_margin_usd": 0, "est_daily_unit_sales": 0}
+  ]
+}

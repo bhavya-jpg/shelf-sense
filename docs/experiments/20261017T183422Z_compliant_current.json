@@ -1,0 +1,132 @@
+{
+  "timestamp": "2026-10-17T18:33:36+00:00",
+  "prompt_variant": "current",
+  "prompt_sha256": "98359f4e9e4d",
+  "model": "Gemma-4-31B-IT",
+  "endpoint_host": "developer.amd.com.cn",
+  "image": "data/demo/compliant.png",
+  "image_sent_size": [
+    1024,
+    774
+  ],
+  "spec_id": "nestle_cereal_bay_v1",
+  "truth": {
+    "image": "data/demo/compliant.png",
+    "spec": "specs/nestle_cereal_bay.json",
+    "source": "Counted manually by the project author from the photo (visible packages, half-hidden boxes included, left-edge cut-off boxes and the single Frosties excluded). Confirmed 2026-10-17.",
+    "counts": {
+      "nestle_stars": 16,
+      "koko_krunch": 8,
+      "milo_cereal": 4,
+      "trix": 4
+    },
+    "statuses": {
+      "nestle_stars": "present",
+      "koko_krunch": "present",
+      "milo_cereal": "present",
+      "trix": "present"
+    },
+    "overall_status": "compliant"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "raw_replies": [
+        "{\"shelves_visible\": 4, \"items\": [{\"item_id\": \"nestle_stars\", \"shelf_counts\": [6, 5, 3, 2], \"detected_count\": 16, \"count_reliable\": true, \"status\": \"present\", \"confidence\": 100, \"note\": \"Blue boxes distributed across all four shelves.\"}, {\"item_id\": \"koko_krunch\", \"shelf_counts\": [2, 1, 2, 2], \"detected_count\": 7, \"count_reliable\": true, \"status\": \"partial\", \"confidence\": 100, \"note\": \"Found on all shelves, one short of expected count.\"}, {\"item_id\": \"milo_cereal\", \"shelf_counts\": [1, 1, 1, 1], \"detected_count\": 4, \"count_reliable\": true, \"status\": \"present\", \"confidence\": 100, \"note\": \"One green box on each shelf.\"}, {\"item_id\": \"trix\", \"shelf_counts\": [0, 0, 2, 2], \"detected_count\": 4, \"count_reliable\": true, \"status\": \"present\", \"confidence\": 100, \"note\": \"Red boxes located on the bottom two shelves.\"}], \"notes\": \"The shelf is well-stocked with most items meeting the expected count.\"}"
+      ],
+      "latency_s": 45.77,
+      "result": {
+        "spec_id": "nestle_cereal_bay_v1",
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "expected_count": 16,
+            "detected_count": 16,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "Blue boxes distributed across all four shelves."
+          },
+          {
+            "item_id": "koko_krunch",
+            "expected_count": 8,
+            "detected_count": 7,
+            "status": "partial",
+            "confidence": 100.0,
+            "note": "Found on all shelves, one short of expected count."
+          },
+          {
+            "item_id": "milo_cereal",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "One green box on each shelf."
+          },
+          {
+            "item_id": "trix",
+            "expected_count": 4,
+            "detected_count": 4,
+            "status": "present",
+            "confidence": 100.0,
+            "note": "Red boxes located on the bottom two shelves."
+          }
+        ],
+        "overall_status": "non_compliant",
+        "raw_model_notes": "The shelf is well-stocked with most items meeting the expected count.",
+        "is_mock": false,
+        "model_name": "Gemma-4-31B-IT",
+        "latency_s": 45.77
+      },
+      "score": {
+        "items": [
+          {
+            "item_id": "nestle_stars",
+            "truth": 16,
+            "detected": 16,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "koko_krunch",
+            "truth": 8,
+            "detected": 7,
+            "error": -1,
+            "status": "partial",
+            "truth_status": "present",
+            "count_correct": false,
+            "status_correct": false
+          },
+          {
+            "item_id": "milo_cereal",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          },
+          {
+            "item_id": "trix",
+            "truth": 4,
+            "detected": 4,
+            "error": 0,
+            "status": "present",
+            "truth_status": "present",
+            "count_correct": true,
+            "status_correct": true
+          }
+        ],
+        "exact_counts": 3,
+        "correct_statuses": 3,
+        "n_items": 4,
+        "total_abs_count_error": 1,
+        "overall_status": "non_compliant",
+        "overall_correct": false
+      }
+    }
+  ]
+}
