@@ -1,6 +1,8 @@
 [server]
 # Must match app.pipeline.MAX_UPLOAD_MB, which the app also enforces itself.
 maxUploadSize = 15
+# Serves app/static/ at /app/static/ (landing-page images).
+enableStaticServing = true
 
 [browser]
 gatherUsageStats = false

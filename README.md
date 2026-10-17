@@ -12,7 +12,8 @@ Store staff check shelves by eye, rarely and inconsistently, and small retailers
 
 ## Features
 
-- **Upload or pick a demo photo, choose a spec, run one inspection.** Single-page Streamlit app with empty, loading and error states, and a retry button.
+- **A three-page web app:** a landing page (`/`), the inspection dashboard (`/inspect`) and a method-and-evidence page (`/how-it-works`), with a shared navbar and footer. Navigation is client-side, so an inspection result survives moving between pages.
+- **Upload or pick a demo photo, choose a spec, run one inspection.** The dashboard has empty, processing and error states, and a retry button.
 - **Per-product results:** expected vs. detected counts, per-shelf counts (top to bottom), status (present / partial / missing / misplaced / needs review), and the model's own note.
 - **Estimated Margin at Risk (Unverified):** computed by code with Decimal arithmetic from the counts and the spec's unit margins. It's shown separately from *Unresolved Potential Exposure (Upper Bound)* for items that need review. Items with missing or invalid unit values are reported as *unavailable*, never as $0.
 - **Action note:** a deterministic template that always works. On top of it, an optional AMD-worded version where the model may only choose wording and order; every name, count, status and dollar figure is inserted by code. The app always shows which of the two produced the note.
@@ -43,7 +44,7 @@ git clone <this repo> && cd <repo>
 python3.11 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 cp .env.example .env          # then fill in real values. Never commit .env
-streamlit run app/app.py      # http://localhost:8501
+streamlit run app/app.py      # http://localhost:8501  (landing page; dashboard at /inspect)
 ```
 
 | Variable | Meaning |
@@ -90,7 +91,10 @@ photo + spec (specs/*.json)
    │                        verdict computed by code
    ▼  app/calculator.py     Estimated Margin at Risk (Unverified) — pure functions, Decimal
    ▼  app/action_agent.py   template note; optional AMD wording, validated, else template
-   ▼  app/app.py            UI (app/presenters.py formats; no business logic in the UI)
+   ▼  app/views/inspect.py  dashboard UI (app/ui.py + app/presenters.py format; no business logic in the UI)
+
+   app/app.py routes three pages (app/views/home.py, inspect.py, method.py); app/site.py holds the
+   landing and method markup; app/static/ serves their images.
 ```
 
 | Path | Purpose |

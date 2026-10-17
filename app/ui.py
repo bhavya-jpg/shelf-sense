@@ -78,6 +78,8 @@ background-size:88px 88px;background-attachment:fixed}
 .ss-aside{font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.05em;text-transform:uppercase;white-space:nowrap}
 .ss-label{font-family:var(--mono);font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--mu);margin:18px 0 8px;display:flex;justify-content:space-between;gap:12px}
 .ss-label span{color:var(--dim)}
+.ss-pagehead--ws{padding:34px 0 30px}
+.ss-pagehead--ws .ss-pagehead-h{font-size:clamp(36px,4vw,60px)}
 .ss-hint{font-family:var(--mono);font-size:11.5px;color:var(--dim);letter-spacing:.02em;line-height:1.6;margin-top:8px}
 .ss-meta-line{font-size:13px;color:var(--mu);margin:2px 0 12px}
 .ss-meta-line code{font-family:var(--mono);font-size:12px;color:var(--tx);background:var(--s3);padding:2px 6px;border-radius:2px}
@@ -251,24 +253,23 @@ LOGO = (
 )
 
 
-def header(model_name: str | None, endpoint_host: str | None, mock: bool, configured: bool) -> str:
+def engine_status(model_name: str | None, endpoint_host: str | None, mock: bool, configured: bool) -> str:
     if not configured:
-        engine = '<span class="ss-dot ss-dot--bad"></span><b>Inference not configured</b>'
-    elif mock:
-        engine = '<span class="ss-dot ss-dot--warn"></span><b>MOCK MODE</b><span class="ss-sep">/</span>no AMD call'
-    else:
-        engine = (f'<span class="ss-dot"></span><b>{esc(model_name)}</b><span class="ss-sep">/</span>'
-                  f'AMD Developer Cloud · Token Factory<span class="ss-sep">/</span>{esc(endpoint_host)}')
+        return '<span class="ss-dot ss-dot--bad"></span><b>Inference not configured</b>'
+    if mock:
+        return '<span class="ss-dot ss-dot--warn"></span><b>MOCK MODE</b><span class="ss-sep">/</span>no AMD call'
+    return (f'<span class="ss-dot"></span><b>{esc(model_name)}</b><span class="ss-sep">/</span>'
+            f'AMD Developer Cloud · Token Factory<span class="ss-sep">/</span>{esc(endpoint_host)}')
+
+
+def workspace_head(model_name: str | None, endpoint_host: str | None, mock: bool, configured: bool) -> str:
+    """Dashboard page header: title plus the truthful inference status line."""
     return (
-        f'<div class="ss-top"><div class="ss-brand">{LOGO}<span>Shelf-Sense</span>'
-        f'<span class="ss-tag">Shelf inspection</span></div><div class="ss-engine">{engine}</div></div>'
-        '<div class="ss-hero"><div><div class="ss-eyebrow">[ Retail shelf compliance ]</div>'
-        '<div class="ss-h1" role="heading" aria-level="1">One photograph.<br><span>Every facing counted.</span></div></div>'
-        '<div><div class="ss-lede">A vision model on <b>AMD Developer Cloud</b> counts each product shelf by shelf. '
-        '<b>Code</b> turns those counts into the verdict, an estimated margin at risk and a restocking list, '
-        'and says plainly when a figure is unverified.</div>'
-        '<div class="ss-coords"><span>Model <b>' + esc(model_name or "—") + '</b></span>'
-        '<span>Input <b>≤1024 px</b></span><span>Calls <b>1 per inspection</b></span></div></div></div>'
+        '<div class="ss-pagehead ss-pagehead--ws"><div><span class="ss-eb">[ Dashboard ]</span>'
+        '<div class="ss-pagehead-h" role="heading" aria-level="1">Inspection<br><span>workspace.</span></div></div>'
+        '<div><div class="ss-lede">Pick a spec, add a shelf photo and run one inspection. The vision model counts on '
+        '<b>AMD Developer Cloud</b>; <b>code</b> computes the verdict, the estimate and the actions.</div>'
+        f'<div class="ss-engine" style="margin-top:18px">{engine_status(model_name, endpoint_host, mock, configured)}</div></div></div>'
     )
 
 

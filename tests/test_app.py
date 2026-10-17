@@ -11,7 +11,8 @@ from streamlit.testing.v1 import AppTest
 
 from app.config import REPO_ROOT
 
-APP = str(REPO_ROOT / "app" / "app.py")
+# The dashboard page runs on its own; the router (app/app.py) is covered in tests/test_site.py.
+APP = str(REPO_ROOT / "app" / "views" / "inspect.py")
 
 
 @pytest.fixture
@@ -53,7 +54,7 @@ def page_text(at) -> str:
 def test_app_starts_and_loads_spec_in_mock_mode(env):
     env.setenv("MOCK_MODE", "true")
     at = start()
-    assert "Shelf-Sense" in page_text(at)
+    assert "Inspection" in page_text(at) and "workspace." in page_text(at)
     assert "MOCK MODE" in page_text(at)
     assert at.selectbox(key="spec_name").value == "cereal_endcap"  # tests/fixtures/cereal_endcap.json
     assert "Aisle 4 endcap" in texts(at.markdown) and "cereal_endcap_v1" in texts(at.markdown)

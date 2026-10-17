@@ -74,7 +74,7 @@ def test_actions_panel_labels_its_source(spec):
     assert "No action note" in ui.actions(unavailable, summary)
 
 
-def test_header_reflects_configuration_state():
-    assert "Gemma-4-31B-IT" in ui.header("Gemma-4-31B-IT", "developer.amd.com.cn", mock=False, configured=True)
-    assert "MOCK MODE" in ui.header("Gemma-4-31B-IT", "x", mock=True, configured=True)
-    assert "Inference not configured" in ui.header(None, None, mock=False, configured=False)
+def test_workspace_head_reflects_configuration_state():
+    assert "Gemma-4-31B-IT" in ui.workspace_head("Gemma-4-31B-IT", "developer.amd.com.cn", mock=False, configured=True)
+    assert "MOCK MODE" in ui.workspace_head("Gemma-4-31B-IT", "x", mock=True, configured=True)
+    assert "Inference not configured" in ui.workspace_head(None, None, mock=False, configured=False)
