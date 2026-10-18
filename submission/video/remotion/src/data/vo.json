@@ -1,0 +1,192 @@
+{
+ "s1_hook": {
+  "seconds": 6.198,
+  "lines": [
+   {
+    "text": "Every store has a shelf that is quietly running low.",
+    "start": 0.25,
+    "end": 2.945
+   },
+   {
+    "text": "And most shelves are still checked by eye.",
+    "start": 3.265,
+    "end": 5.748
+   }
+  ]
+ },
+ "s2_problem": {
+  "seconds": 13.294,
+  "lines": [
+   {
+    "text": "Someone walks the aisle, counts the boxes, and writes it down.",
+    "start": 0.25,
+    "end": 3.935
+   },
+   {
+    "text": "Gaps sit unnoticed between walks, and two people can count the same shelf two different ways.",
+    "start": 4.255,
+    "end": 9.772
+   },
+   {
+    "text": "Nobody knows what a missing facing actually costs.",
+    "start": 10.092,
+    "end": 12.844
+   }
+  ]
+ },
+ "s3_solution": {
+  "seconds": 15.229,
+  "lines": [
+   {
+    "text": "Shelf-Sense turns one shelf photograph into a preliminary compliance report.",
+    "start": 0.25,
+    "end": 4.733
+   },
+   {
+    "text": "Choose a shelf specification, add a photo, and run one inspection.",
+    "start": 5.053,
+    "end": 9.303
+   },
+   {
+    "text": "A vision model counts each product, shelf by shelf. Code makes every decision.",
+    "start": 9.623,
+    "end": 14.779
+   }
+  ]
+ },
+ "s4_demo": {
+  "seconds": 14.478,
+  "lines": [
+   {
+    "text": "This is the real application, inspecting a photo we took of a cereal bay.",
+    "start": 0.25,
+    "end": 4.459
+   },
+   {
+    "text": "The photo goes to Gemma-4-31B-IT on AMD Developer Cloud's Token Factory.",
+    "start": 4.779,
+    "end": 10.07
+   },
+   {
+    "text": "The shared endpoint takes a while to answer, so we have sped up the wait.",
+    "start": 10.39,
+    "end": 14.028
+   }
+  ]
+ },
+ "s5_results": {
+  "seconds": 19.088,
+  "lines": [
+   {
+    "text": "Here is the result: counts for every product, shelf by shelf, against the expected inventory.",
+    "start": 0.25,
+    "end": 5.917
+   },
+   {
+    "text": "Discrepancies are flagged, and an estimated margin at risk is calculated in code.",
+    "start": 6.237,
+    "end": 10.831
+   },
+   {
+    "text": "That figure is always labelled unverified. It comes from AI-estimated counts and demo margin assumptions.",
+    "start": 11.151,
+    "end": 18.638
+   }
+  ]
+ },
+ "s6_actions": {
+  "seconds": 8.846,
+  "lines": [
+   {
+    "text": "Then a restocking list.",
+    "start": 0.25,
+    "end": 1.897
+   },
+   {
+    "text": "The model can reword it, but every name, count and figure is inserted by code, and the app says who wrote it.",
+    "start": 2.217,
+    "end": 8.396
+   }
+  ]
+ },
+ "s7_arch": {
+  "seconds": 20.093,
+  "lines": [
+   {
+    "text": "Under the hood it is one Python process.",
+    "start": 0.25,
+    "end": 2.784
+   },
+   {
+    "text": "The photo is resized to 1024 pixels and sent with the specification in a single call.",
+    "start": 3.104,
+    "end": 8.775
+   },
+   {
+    "text": "The model returns structured counts. They are validated, and anything unreliable goes to review.",
+    "start": 9.095,
+    "end": 14.889
+   },
+   {
+    "text": "The verdict, the money, and the action list are computed in plain Python.",
+    "start": 15.209,
+    "end": 19.643
+   }
+  ]
+ },
+ "s8_eval": {
+  "seconds": 22.177,
+  "lines": [
+   {
+    "text": "We measured it against a shelf we counted by hand.",
+    "start": 0.25,
+    "end": 2.667
+   },
+   {
+    "text": "A shelf-by-shelf prompt cut the counting error from eight boxes to one.",
+    "start": 2.987,
+    "end": 6.732
+   },
+   {
+    "text": "But the model still misses one half-hidden Koko Krunch box, at 100% confidence. So this fully stocked shelf is reported as short.",
+    "start": 7.052,
+    "end": 15.547
+   },
+   {
+    "text": "So every figure is labelled unverified, and the per-shelf counts let a person check it in seconds.",
+    "start": 15.867,
+    "end": 21.727
+   }
+  ]
+ },
+ "s9_amd": {
+  "seconds": 12.446,
+  "lines": [
+   {
+    "text": "Every inspection runs on AMD, with a median of about 18 seconds on the shared endpoint.",
+    "start": 0.25,
+    "end": 5.984
+   },
+   {
+    "text": "For a store manager, it is a fast second opinion: where to look, and roughly what is at stake.",
+    "start": 6.304,
+    "end": 11.996
+   }
+  ]
+ },
+ "s10_close": {
+  "seconds": 14.014,
+  "lines": [
+   {
+    "text": "Next: better counting under occlusion, human verification of uncertain findings, and many more shelves.",
+    "start": 0.25,
+    "end": 6.827
+   },
+   {
+    "text": "Shelf-Sense. AMD-hosted vision, decisions in code, honest about its limits.",
+    "start": 7.147,
+    "end": 13.564
+   }
+  ]
+ }
+}

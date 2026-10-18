@@ -1,0 +1,15 @@
+{
+ "inspect": {
+  "frames": 470,
+  "speedup": 6.05,
+  "realWaitS": 15.9,
+  "fastFrom": 292,
+  "fastTo": 367,
+  "marks": {
+   "spec": 79,
+   "photo": 201,
+   "run": 277,
+   "result": 373
+  }
+ }
+}

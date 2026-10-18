@@ -1,0 +1,50 @@
+[
+ {"id": "s1_hook", "lines": [
+  {"say": "Every store has a shelf that is quietly running low.", "show": "Every store has a shelf that is quietly running low."},
+  {"say": "And most shelves are still checked by eye.", "show": "And most shelves are still checked by eye."}
+ ]},
+ {"id": "s2_problem", "lines": [
+  {"say": "Someone walks the aisle, counts the boxes, and writes it down.", "show": "Someone walks the aisle, counts the boxes, and writes it down."},
+  {"say": "Gaps sit unnoticed between walks, and two people can count the same shelf two different ways.", "show": "Gaps sit unnoticed between walks, and two people can count the same shelf two different ways."},
+  {"say": "Nobody knows what a missing facing actually costs.", "show": "Nobody knows what a missing facing actually costs."}
+ ]},
+ {"id": "s3_solution", "lines": [
+  {"say": "Shelf Sense turns one shelf photograph into a preliminary compliance report.", "show": "Shelf-Sense turns one shelf photograph into a preliminary compliance report."},
+  {"say": "Choose a shelf specification, add a photo, and run one inspection.", "show": "Choose a shelf specification, add a photo, and run one inspection."},
+  {"say": "A vision model counts each product, shelf by shelf. Code makes every decision.", "show": "A vision model counts each product, shelf by shelf. Code makes every decision."}
+ ]},
+ {"id": "s4_demo", "lines": [
+  {"say": "This is the real application, inspecting a photo we took of a cereal bay.", "show": "This is the real application, inspecting a photo we took of a cereal bay."},
+  {"say": "The photo goes to Gemma four, thirty one B, on A M D Developer Cloud's Token Factory.", "show": "The photo goes to Gemma-4-31B-IT on AMD Developer Cloud's Token Factory."},
+  {"say": "The shared endpoint takes a while to answer, so we have sped up the wait.", "show": "The shared endpoint takes a while to answer, so we have sped up the wait."}
+ ]},
+ {"id": "s5_results", "lines": [
+  {"say": "Here is the result: counts for every product, shelf by shelf, against the expected inventory.", "show": "Here is the result: counts for every product, shelf by shelf, against the expected inventory."},
+  {"say": "Discrepancies are flagged, and an estimated margin at risk is calculated in code.", "show": "Discrepancies are flagged, and an estimated margin at risk is calculated in code."},
+  {"say": "That figure is always labelled unverified. It comes from A I estimated counts and demo margin assumptions.", "show": "That figure is always labelled unverified. It comes from AI-estimated counts and demo margin assumptions."}
+ ]},
+ {"id": "s6_actions", "lines": [
+  {"say": "Then a restocking list.", "show": "Then a restocking list."},
+  {"say": "The model can reword it, but every name, count and figure is inserted by code, and the app says who wrote it.", "show": "The model can reword it, but every name, count and figure is inserted by code, and the app says who wrote it."}
+ ]},
+ {"id": "s7_arch", "lines": [
+  {"say": "Under the hood it is one Python process.", "show": "Under the hood it is one Python process."},
+  {"say": "The photo is resized to ten twenty four pixels and sent with the specification in a single call.", "show": "The photo is resized to 1024 pixels and sent with the specification in a single call."},
+  {"say": "The model returns structured counts. They are validated, and anything unreliable goes to review.", "show": "The model returns structured counts. They are validated, and anything unreliable goes to review."},
+  {"say": "The verdict, the money, and the action list are computed in plain Python.", "show": "The verdict, the money, and the action list are computed in plain Python."}
+ ]},
+ {"id": "s8_eval", "lines": [
+  {"say": "We measured it against a shelf we counted by hand.", "show": "We measured it against a shelf we counted by hand."},
+  {"say": "A shelf by shelf prompt cut the counting error from eight boxes to one.", "show": "A shelf-by-shelf prompt cut the counting error from eight boxes to one."},
+  {"say": "But the model still misses one half hidden Koko Krunch box, at one hundred percent confidence. So this fully stocked shelf is reported as short.", "show": "But the model still misses one half-hidden Koko Krunch box, at 100% confidence. So this fully stocked shelf is reported as short."},
+  {"say": "So every figure is labelled unverified, and the per shelf counts let a person check it in seconds.", "show": "So every figure is labelled unverified, and the per-shelf counts let a person check it in seconds."}
+ ]},
+ {"id": "s9_amd", "lines": [
+  {"say": "Every inspection runs on A M D, with a median of about eighteen seconds on the shared endpoint.", "show": "Every inspection runs on AMD, with a median of about 18 seconds on the shared endpoint."},
+  {"say": "For a store manager, it is a fast second opinion: where to look, and roughly what is at stake.", "show": "For a store manager, it is a fast second opinion: where to look, and roughly what is at stake."}
+ ]},
+ {"id": "s10_close", "lines": [
+  {"say": "Next: better counting under occlusion, human verification of uncertain findings, and many more shelves.", "show": "Next: better counting under occlusion, human verification of uncertain findings, and many more shelves."},
+  {"say": "Shelf Sense. A M D hosted vision, decisions in code, honest about its limits.", "show": "Shelf-Sense. AMD-hosted vision, decisions in code, honest about its limits."}
+ ]}
+]

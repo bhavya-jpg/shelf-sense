@@ -13,3 +13,11 @@ __pycache__/
 .DS_Store
 .vscode/
 .idea/
+
+# Video tooling (large, reproducible)
+submission/video/.tts-venv/
+submission/video/remotion/node_modules/
+submission/video/remotion/out/
+submission/presentation/node_modules/
+submission/**/*.log
+submission/.qc-private

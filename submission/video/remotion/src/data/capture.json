@@ -1,0 +1,34 @@
+{
+ "base": "http://localhost:8501",
+ "captured_at": "2026-10-18T02:32:37",
+ "clips": {
+  "landing": {
+   "loaded": 4.95,
+   "product_frame": 11.46,
+   "problem": 16.74,
+   "how": 21.65,
+   "evidence": 26.68,
+   "honest": 31.48,
+   "seconds": 31.94
+  },
+  "inspect": {
+   "loaded": 3.14,
+   "spec": 5.38,
+   "photo": 9.44,
+   "run": 11.97,
+   "processing": 13.45,
+   "result": 27.88,
+   "verdict_hold": 33.05,
+   "table": 38.69,
+   "actions": 45.19,
+   "caption": 49.47,
+   "result_text": {
+    "verdict": "Non-compliant",
+    "run_meta": "Gemma-4-31B-IT \u00b7 13.23 s\nReal inference \u00b7 developer.amd.com.cn",
+    "stats": "PRODUCTS CHECKED\n4\nDISCREPANCIES\n1\nESTIMATED MARGIN AT RISK (UNVERIFIED)\n$1.00\nUNVERIFIED \u00b7 AI-ESTIMATED COUNTS\nUNRESOLVED POTENTIAL EXPOSURE (UPPER BOUND)\nNone",
+    "note_source": "AMD-WORDED \u00b7 GEMMA-4-31B-IT"
+   },
+   "seconds": 50.23
+  }
+ }
+}

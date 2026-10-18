@@ -1,0 +1,111 @@
+1
+00:00:00,250 --> 00:00:03,145
+Every store has a shelf that is quietly running low.
+
+2
+00:00:03,265 --> 00:00:05,948
+And most shelves are still checked by eye.
+
+3
+00:00:06,483 --> 00:00:10,368
+Someone walks the aisle, counts the boxes, and writes it down.
+
+4
+00:00:10,488 --> 00:00:16,205
+Gaps sit unnoticed between walks, and two people can count the same shelf two different ways.
+
+5
+00:00:16,325 --> 00:00:19,277
+Nobody knows what a missing facing actually costs.
+
+6
+00:00:19,817 --> 00:00:24,500
+Shelf-Sense turns one shelf photograph into a preliminary compliance report.
+
+7
+00:00:24,620 --> 00:00:29,070
+Choose a shelf specification, add a photo, and run one inspection.
+
+8
+00:00:29,190 --> 00:00:34,546
+A vision model counts each product, shelf by shelf. Code makes every decision.
+
+9
+00:00:35,083 --> 00:00:39,492
+This is the real application, inspecting a photo we took of a cereal bay.
+
+10
+00:00:39,612 --> 00:00:45,103
+The photo goes to Gemma-4-31B-IT on AMD Developer Cloud's Token Factory.
+
+11
+00:00:45,223 --> 00:00:49,061
+The shared endpoint takes a while to answer, so we have sped up the wait.
+
+12
+00:00:49,617 --> 00:00:55,484
+Here is the result: counts for every product, shelf by shelf, against the expected inventory.
+
+13
+00:00:55,604 --> 00:01:00,398
+Discrepancies are flagged, and an estimated margin at risk is calculated in code.
+
+14
+00:01:00,518 --> 00:01:08,205
+That figure is always labelled unverified. It comes from AI-estimated counts and demo margin assumptions.
+
+15
+00:01:08,750 --> 00:01:10,597
+Then a restocking list.
+
+16
+00:01:10,717 --> 00:01:17,096
+The model can reword it, but every name, count and figure is inserted by code, and the app says who wrote it.
+
+17
+00:01:17,650 --> 00:01:20,384
+Under the hood it is one Python process.
+
+18
+00:01:20,504 --> 00:01:26,375
+The photo is resized to 1024 pixels and sent with the specification in a single call.
+
+19
+00:01:26,495 --> 00:01:32,489
+The model returns structured counts. They are validated, and anything unreliable goes to review.
+
+20
+00:01:32,609 --> 00:01:37,243
+The verdict, the money, and the action list are computed in plain Python.
+
+21
+00:01:37,783 --> 00:01:40,400
+We measured it against a shelf we counted by hand.
+
+22
+00:01:40,520 --> 00:01:44,465
+A shelf-by-shelf prompt cut the counting error from eight boxes to one.
+
+23
+00:01:44,585 --> 00:01:53,280
+But the model still misses one half-hidden Koko Krunch box, at 100% confidence. So this fully stocked shelf is reported as short.
+
+24
+00:01:53,400 --> 00:01:59,460
+So every figure is labelled unverified, and the per-shelf counts let a person check it in seconds.
+
+25
+00:02:00,017 --> 00:02:05,951
+Every inspection runs on AMD, with a median of about 18 seconds on the shared endpoint.
+
+26
+00:02:06,071 --> 00:02:11,963
+For a store manager, it is a fast second opinion: where to look, and roughly what is at stake.
+
+27
+00:02:12,517 --> 00:02:19,294
+Next: better counting under occlusion, human verification of uncertain findings, and many more shelves.
+
+28
+00:02:19,414 --> 00:02:26,031
+Shelf-Sense. AMD-hosted vision, decisions in code, honest about its limits.
